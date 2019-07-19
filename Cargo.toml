@@ -1,0 +1,8 @@
+[package]
+name = "rust-ci-test"
+version = "0.1.0"
+authors = ["Forest <wizcardforest@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7"
