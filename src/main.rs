@@ -14,4 +14,12 @@ fn main() {
         println!("y is: {}", y);
         println!("Number from 0 to 9: {}", rng.gen_range(0, 10));
     }
+
+    // Sometimes it's useful to use distributions directly:
+    let distr = rand::distributions::Uniform::new_inclusive(1, 100);
+    let mut nums = [0i32; 3];
+    for x in &mut nums {
+        *x = rng.sample(distr);
+    }
+    println!("Some numbers: {:?}", nums);
 }
