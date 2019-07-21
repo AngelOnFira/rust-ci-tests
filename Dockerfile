@@ -7,20 +7,20 @@ RUN git clone https://github.com/AngelOnFira/rust-ci-tests .; \
     touch log
 
 RUN git checkout changes~3; \
-    bash -c cargo run &>> log
+    cargo run
 
 RUN git checkout changes~2; \
-    bash -c cargo run &>> log
+    cargo run
 
 RUN git checkout changes~1; \
-    bash -c cargo run &>> log
+    cargo run
 
 RUN git checkout changes; \
-    bash -c cargo run &>> log
+    cargo run
 
 RUN rm -rf target/debug/incremental
 
 RUN git checkout changes; \
-    bash -c cargo run &>> log
+    cargo run
 
 RUN cat log
