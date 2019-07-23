@@ -7,20 +7,20 @@ RUN git clone https://github.com/AngelOnFira/rust-ci-tests .; \
     touch log
 
 RUN git checkout changes~3; \
-    cargo run
+    CARGO_INCREMENTAL=0 cargo run
 
 RUN git checkout changes~2; \
-    cargo run
+    CARGO_INCREMENTAL=0 cargo run
 
 RUN git checkout changes~1; \
-    cargo run
+    CARGO_INCREMENTAL=0 cargo run
 
 RUN git checkout changes; \
-    cargo run
+    CARGO_INCREMENTAL=0 cargo run
 
 RUN rm -rf target/debug/incremental
 
 RUN git checkout changes; \
-    cargo run
+    CARGO_INCREMENTAL=0 cargo run
 
 RUN cat log
