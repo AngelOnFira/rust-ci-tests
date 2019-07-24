@@ -2,25 +2,12 @@ FROM rust:1.36.0
 
 WORKDIR /app
 
-RUN git clone https://github.com/AngelOnFira/rust-ci-tests .; \
-    git checkout changes; \
+RUN git clone https://gitlab.com/veloren/veloren.git .; \
     touch log
 
-RUN git checkout changes~3; \
-    CARGO_INCREMENTAL=0 cargo run
+WORKDIR /app/server-cli
 
-RUN git checkout changes~2; \
-    CARGO_INCREMENTAL=0 cargo run
-
-RUN git checkout changes~1; \
-    CARGO_INCREMENTAL=0 cargo run
-
-RUN git checkout changes; \
-    CARGO_INCREMENTAL=0 cargo run
-
-RUN rm -rf target/debug/incremental
-
-RUN git checkout changes; \
-    CARGO_INCREMENTAL=0 cargo run
-
-RUN cat log
+RUN for i in 10 8 6 4 2; do \
+        git checkout master~$i; \
+        CARGO_INCREMENTAL=1 cargo build | grep "Finished"; \
+    done
